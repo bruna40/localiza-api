@@ -1,4 +1,4 @@
-from src.main.repositories.user_repository import create_user, find_user_by_email
+from src.main.repositories.user_repository import create_user, find_user_by_email, find_by_user_id
 from src.main.security.password import hash_password, verify_password
 from src.main.security.token import gerar_jwt
 
@@ -28,4 +28,17 @@ def login(user: dict):
     return {
         "acess_token": token,
         "token_type": "bearer"
+    }
+
+def get_user(user_id: str):
+    
+    user = find_by_user_id(user_id)
+    if not user:
+        raise ValueError("Usuário não encontrado")
+    
+    return {
+        "id": str(user["_id"]),
+        "name": user["name"],
+        "email": user["email"],
+        "created_at": user["created_at"]
     }
