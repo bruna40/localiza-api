@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 load_dotenv()
 from fastapi import FastAPI
 from src.main.controllers.location_controller import router as location_router
-from src.main.controllers.user_controller import router as user_router
+from src.main.routes.user_router import router as user_router
 
 app = FastAPI()
 
